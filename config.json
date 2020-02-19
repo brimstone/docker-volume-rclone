@@ -1,8 +1,8 @@
 {
-  "description": "sshFS plugin for Docker",
+  "description": "rclone plugin for Docker",
   "documentation": "https://docs.docker.com/engine/extend/plugins/",
   "entrypoint": [
-    "/docker-volume-sshfs"
+    "/docker-volume-rclone"
   ],
   "env": [
     {
@@ -14,7 +14,7 @@
     }
   ],
   "interface": {
-    "socket": "sshfs.sock",
+    "socket": "rclone.sock",
     "types": [
       "docker.volumedriver/1.0"
     ]
@@ -37,18 +37,6 @@
       ],
       "name": "state",
       "source": "/var/lib/docker/plugins/",
-      "settable": [
-        "source"
-      ],
-      "type": "bind"
-    },
-    {
-      "destination": "/root/.ssh",
-      "options": [
-        "rbind"
-      ],
-      "name": "sshkey",
-      "source": "",
       "settable": [
         "source"
       ],

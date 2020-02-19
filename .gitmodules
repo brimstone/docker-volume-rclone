@@ -1,0 +1,4 @@
+[submodule "rclone"]
+	path = rclone
+	url = https://github.com/storj/rclone
+	branch = feature/storj

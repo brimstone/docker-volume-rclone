@@ -1,15 +1,15 @@
-PLUGIN_NAME = vieux/sshfs
+PLUGIN_NAME = brimstone/docker-volume-rclone
 PLUGIN_TAG ?= next
 
-all: clean rootfs create
+all: clean rootfs create enable
 
 clean:
 	@echo "### rm ./plugin"
 	@rm -rf ./plugin
 
 rootfs:
-	@echo "### docker build: rootfs image with docker-volume-sshfs"
-	@docker build -q -t ${PLUGIN_NAME}:rootfs .
+	@echo "### docker build: rootfs image with docker-volume-rclone"
+	@docker build -t ${PLUGIN_NAME}:rootfs .
 	@echo "### create rootfs directory in ./plugin/rootfs"
 	@mkdir -p ./plugin/rootfs
 	@docker create --name tmp ${PLUGIN_NAME}:rootfs
@@ -24,8 +24,8 @@ create:
 	@echo "### create new plugin ${PLUGIN_NAME}:${PLUGIN_TAG} from ./plugin"
 	@docker plugin create ${PLUGIN_NAME}:${PLUGIN_TAG} ./plugin
 
-enable:		
-	@echo "### enable plugin ${PLUGIN_NAME}:${PLUGIN_TAG}"		
+enable:
+	@echo "### enable plugin ${PLUGIN_NAME}:${PLUGIN_TAG}"
 	@docker plugin enable ${PLUGIN_NAME}:${PLUGIN_TAG}
 
 push:  clean rootfs create enable
